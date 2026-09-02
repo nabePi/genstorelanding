@@ -208,6 +208,7 @@ function App() {
           onCanPlay={() => setVideoState("ready")}
           onError={() => setVideoState("error")}
         >
+          <source src="/al-aqsa-motion-desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
           <source src="/al-aqsa-motion.mp4" type="video/mp4" />
         </video>
         <div className="background__fallback" />
