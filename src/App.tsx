@@ -7,7 +7,7 @@ import {
   DownloadSimple,
   LinkSimple,
   ShareNetwork,
-  ShoppingBagOpen,
+  ShoppingCart,
 } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +26,7 @@ const mainLinks: LinkItem[] = [
     label: "Belanja Buku di Website",
     description: "Katalog lengkap dan proses pesanan cepat",
     href: "https://store.gensaberilmu.com/",
-    icon: ShoppingBagOpen,
+    icon: ShoppingCart,
     featured: true,
   },
   {
