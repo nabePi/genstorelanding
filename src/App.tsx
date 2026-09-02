@@ -2,12 +2,10 @@ import {
   ArrowUpRight,
   BookOpenText,
   Broadcast,
-  Briefcase,
   CaretRight,
   Check,
   DownloadSimple,
   LinkSimple,
-  Megaphone,
   ShareNetwork,
   ShoppingBagOpen,
 } from "@phosphor-icons/react";
@@ -41,7 +39,7 @@ const mainLinks: LinkItem[] = [
     label: "Daftar Reseller dan Dropship",
     description: "Mulai bertumbuh bersama Gensa Berilmu",
     href: "https://desty.page/gensa.berilmu",
-    icon: Briefcase,
+    iconSrc: "/reseller-icon.png",
   },
   {
     label: "Undang Ustadz Edgar Hamas",
@@ -53,7 +51,7 @@ const mainLinks: LinkItem[] = [
     label: "Program Marketing Affiliate",
     description: "Bagikan manfaat, dapatkan penghasilan",
     href: "https://bit.ly/ikutmasarinprodukgensadong",
-    icon: Megaphone,
+    iconSrc: "/affiliate-icon.png",
   },
   {
     label: "Chat Admin Gensa Berilmu",
