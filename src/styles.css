@@ -21,7 +21,6 @@ html {
   min-width: 320px;
   min-height: 100%;
   background: #e8ede7;
-  overscroll-behavior-y: none;
 }
 
 body {
@@ -30,7 +29,6 @@ body {
   min-height: 100%;
   color: var(--text);
   background: #e8ede7;
-  overscroll-behavior-y: none;
 }
 
 button,
