@@ -115,6 +115,37 @@ function App() {
   }, [reducedMotion]);
 
   useEffect(() => {
+    if (reducedMotion) return;
+
+    let resumeTimer: number;
+    const resumePlayback = () => {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        const video = videoRef.current;
+        if (video && video.paused) {
+          void video.play().catch(() => setVideoState("error"));
+        }
+      }, 220);
+    };
+    const pauseDuringScroll = () => {
+      const video = videoRef.current;
+      if (video && !video.paused) {
+        video.pause();
+      }
+      resumePlayback();
+    };
+
+    window.addEventListener("scroll", pauseDuringScroll, { passive: true });
+    window.addEventListener("touchmove", pauseDuringScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", pauseDuringScroll);
+      window.removeEventListener("touchmove", pauseDuringScroll);
+      window.clearTimeout(resumeTimer);
+    };
+  }, [reducedMotion]);
+
+  useEffect(() => {
     if (!notice) return;
     const timer = window.setTimeout(() => setNotice(null), 2600);
     return () => window.clearTimeout(timer);
