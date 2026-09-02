@@ -7,7 +7,6 @@ import {
   CaretRight,
   Check,
   DownloadSimple,
-  InstagramLogo,
   LinkSimple,
   Megaphone,
   ShareNetwork,
@@ -257,7 +256,13 @@ function App() {
           style={{ "--delay": "560ms" } as React.CSSProperties}
         >
           <a href="https://instagram.com/gensa.berilmu" target="_blank" rel="noreferrer">
-            <InstagramLogo size={23} weight="fill" />
+            <img
+              className="social-row__icon-image"
+              src="/instagram-logo.png"
+              alt=""
+              width={23}
+              height={23}
+            />
             <span>Instagram</span>
             <ArrowUpRight size={17} weight="bold" />
           </a>

@@ -456,6 +456,11 @@ h1 {
   object-fit: contain;
 }
 
+.social-row__icon-image {
+  display: block;
+  object-fit: contain;
+}
+
 .marketplace__grid span {
   align-self: end;
   font-size: 0.76rem;
