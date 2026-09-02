@@ -3,7 +3,6 @@ import {
   BookOpenText,
   Broadcast,
   Briefcase,
-  CalendarCheck,
   CaretRight,
   Check,
   DownloadSimple,
@@ -48,7 +47,7 @@ const mainLinks: LinkItem[] = [
     label: "Undang Ustadz Edgar Hamas",
     description: "Informasi agenda dan undangan kajian",
     href: "https://wa.me/6282258532347",
-    icon: CalendarCheck,
+    iconSrc: "/google-calendar-icon.png",
   },
   {
     label: "Program Marketing Affiliate",
