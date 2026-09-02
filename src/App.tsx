@@ -204,12 +204,12 @@ function App() {
           muted
           playsInline
           preload="auto"
-          poster="/al-aqsa-poster.jpg"
+          poster="/al-aqsa-poster-v2.jpg"
           onCanPlay={() => setVideoState("ready")}
           onError={() => setVideoState("error")}
         >
-          <source src="/al-aqsa-motion-desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
-          <source src="/al-aqsa-motion.mp4" type="video/mp4" />
+          <source src="/al-aqsa-motion-desktop-v2.mp4" type="video/mp4" media="(min-width: 768px)" />
+          <source src="/al-aqsa-motion-v2.mp4" type="video/mp4" />
         </video>
         <div className="background__fallback" />
         <div className="background__scrim" />
