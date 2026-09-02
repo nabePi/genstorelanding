@@ -12,7 +12,6 @@ import {
   Megaphone,
   ShareNetwork,
   ShoppingBagOpen,
-  Storefront,
   TiktokLogo,
   WhatsappLogo,
   YoutubeLogo,
@@ -68,11 +67,16 @@ const mainLinks: LinkItem[] = [
   },
 ];
 
-const marketplaceLinks = [
+const marketplaceLinks: {
+  label: string;
+  href: string;
+  icon?: Icon;
+  iconSrc?: string;
+}[] = [
   {
     label: "Tokopedia",
     href: "https://bit.ly/m/TokopediaSeller",
-    icon: Storefront,
+    iconSrc: "/tokopedia-mascot.png",
   },
   {
     label: "TikTok",
@@ -271,7 +275,17 @@ function App() {
               const ItemIcon = item.icon;
               return (
                 <a href={item.href} key={item.label} target="_blank" rel="noreferrer">
-                  <ItemIcon size={25} weight="duotone" />
+                  {item.iconSrc ? (
+                    <img
+                      className="marketplace__icon-image"
+                      src={item.iconSrc}
+                      alt=""
+                      width={25}
+                      height={25}
+                    />
+                  ) : (
+                    ItemIcon && <ItemIcon size={25} weight="duotone" />
+                  )}
                   <span>{item.label}</span>
                   <ArrowUpRight size={16} weight="bold" />
                 </a>

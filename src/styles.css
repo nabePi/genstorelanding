@@ -446,6 +446,11 @@ h1 {
   color: var(--accent);
 }
 
+.marketplace__icon-image {
+  display: block;
+  object-fit: contain;
+}
+
 .marketplace__grid span {
   align-self: end;
   font-size: 0.76rem;
