@@ -85,7 +85,7 @@ const marketplaceLinks: {
   {
     label: "Shopee",
     href: "https://linktr.ee/gensaberilmu",
-    icon: ShoppingBagOpen,
+    iconSrc: "/shopee-logo.png",
   },
 ];
 
