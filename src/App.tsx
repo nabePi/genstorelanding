@@ -11,7 +11,6 @@ import {
   Megaphone,
   ShareNetwork,
   ShoppingBagOpen,
-  YoutubeLogo,
 } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
@@ -271,7 +270,13 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            <YoutubeLogo size={23} weight="fill" />
+            <img
+              className="social-row__icon-image"
+              src="/youtube-logo.png"
+              alt=""
+              width={23}
+              height={23}
+            />
             <span>YouTube</span>
             <ArrowUpRight size={17} weight="bold" />
           </a>
