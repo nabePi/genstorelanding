@@ -12,7 +12,6 @@ import {
   Megaphone,
   ShareNetwork,
   ShoppingBagOpen,
-  WhatsappLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
@@ -22,7 +21,8 @@ type LinkItem = {
   label: string;
   description: string;
   href: string;
-  icon: Icon;
+  icon?: Icon;
+  iconSrc?: string;
   featured?: boolean;
 };
 
@@ -38,7 +38,7 @@ const mainLinks: LinkItem[] = [
     label: "Gabung Channel WhatsApp",
     description: "Info buku baru, kajian, dan program terbaru",
     href: "https://whatsapp.com/channel/0029VaSJ3ki7z4kYgFRzuT2N",
-    icon: WhatsappLogo,
+    iconSrc: "/whatsapp-logo.png",
   },
   {
     label: "Daftar Reseller dan Dropship",
@@ -62,7 +62,7 @@ const mainLinks: LinkItem[] = [
     label: "Chat Admin Gensa Berilmu",
     description: "Tanya produk dan bantuan pemesanan",
     href: "https://wa.me/6281384804494",
-    icon: WhatsappLogo,
+    iconSrc: "/whatsapp-logo.png",
   },
 ];
 
@@ -227,7 +227,19 @@ function App() {
                 style={{ "--delay": `${160 + index * 60}ms` } as React.CSSProperties}
               >
                 <span className="link-card__icon">
-                  <ItemIcon size={23} weight={item.featured ? "fill" : "regular"} />
+                  {item.iconSrc ? (
+                    <img
+                      className="link-card__icon-image"
+                      src={item.iconSrc}
+                      alt=""
+                      width={23}
+                      height={23}
+                    />
+                  ) : (
+                    ItemIcon && (
+                      <ItemIcon size={23} weight={item.featured ? "fill" : "regular"} />
+                    )
+                  )}
                 </span>
                 <span className="link-card__copy">
                   <strong>{item.label}</strong>
