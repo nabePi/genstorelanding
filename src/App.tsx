@@ -12,7 +12,6 @@ import {
   Megaphone,
   ShareNetwork,
   ShoppingBagOpen,
-  TiktokLogo,
   WhatsappLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react";
@@ -81,7 +80,7 @@ const marketplaceLinks: {
   {
     label: "TikTok",
     href: "https://www.tiktok.com/@gensa.berilmu?_t=8YopMrRuSHZ&_r=1",
-    icon: TiktokLogo,
+    iconSrc: "/tiktok-logo.png",
   },
   {
     label: "Shopee",
