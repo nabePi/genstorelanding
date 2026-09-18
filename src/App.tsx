@@ -219,9 +219,9 @@ function App() {
       <main className="profile">
         <header className="profile__header entrance" style={{ "--delay": "40ms" } as React.CSSProperties}>
           <div className="brand-mark">
-            <img src="/icon.png" alt="Logo Gensa Berilmu" width="74" height="74" />
+            <img src="/logo-gensa.png" alt="Logo Gensa Berilmu" width="74" height="74" />
           </div>
-          <p className="eyebrow">Penerbit Buku Islam</p>
+          <p className="eyebrow">Learn History, Repeat Victory</p>
           <h1>Gensa Berilmu</h1>
           <p className="tagline">Buku yang menyalakan ilmu dan menumbuhkan amal.</p>
         </header>
