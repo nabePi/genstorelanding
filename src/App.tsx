@@ -221,9 +221,9 @@ function App() {
           <div className="brand-mark">
             <img src="/logo-gensa.png" alt="Logo Gensa Berilmu" width="74" height="74" />
           </div>
-          <p className="eyebrow">Learn History, Repeat Victory</p>
+          <p className="eyebrow">Official Website Penerbit</p>
           <h1>Gensa Berilmu</h1>
-          <p className="tagline">Buku yang menyalakan ilmu dan menumbuhkan amal.</p>
+          <p className="tagline">Learn History, Repeat Victory!</p>
         </header>
 
         <section
