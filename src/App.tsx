@@ -25,7 +25,7 @@ const mainLinks: LinkItem[] = [
   {
     label: "Belanja Buku di Website",
     description: "Katalog lengkap dan proses pesanan cepat",
-    href: "https://gensaberilmu.xyz/",
+    href: "https://gensaberilmu.com/",
     icon: ShoppingCart,
     featured: true,
   },
