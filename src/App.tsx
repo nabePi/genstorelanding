@@ -1,5 +1,6 @@
 import {
   ArrowUpRight,
+  Baby,
   BookOpenText,
   Broadcast,
   CaretRight,
@@ -28,6 +29,12 @@ const mainLinks: LinkItem[] = [
     href: "https://store.gensaberilmu.com/",
     icon: ShoppingCart,
     featured: true,
+  },
+  {
+    label: "Belanja di Gensa Kids",
+    description: "Koleksi buku anak Gensa Berilmu",
+    href: "https://store.gensaberilmu.com/kids",
+    icon: Baby,
   },
   {
     label: "Gabung Channel WhatsApp",
