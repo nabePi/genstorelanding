@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ICONS } from "./content";
 import type { IconName } from "./content";
-import { useSiteContent } from "./preview";
+import { isPreviewMode, useSiteContent } from "./preview";
 
 function hostOf(url: string) {
   try {
@@ -134,7 +134,7 @@ function App() {
   };
 
   return (
-    <div className="site-shell" data-video-state={videoState}>
+    <div className="site-shell" data-video-state={videoState} data-preview={isPreviewMode || undefined}>
       <div className="background" aria-hidden="true">
         <video
           ref={videoRef}
