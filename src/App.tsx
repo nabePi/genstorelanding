@@ -1,95 +1,18 @@
-import {
-  ArrowUpRight,
-  Baby,
-  BookOpenText,
-  Broadcast,
-  CaretRight,
-  Check,
-  DownloadSimple,
-  LinkSimple,
-  ShareNetwork,
-  ShoppingCart,
-} from "@phosphor-icons/react";
-import type { Icon } from "@phosphor-icons/react";
+import { ArrowUpRight, CaretRight, Check, DownloadSimple, LinkSimple, ShareNetwork, BookOpenText } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 
-type LinkItem = {
-  label: string;
-  description: string;
-  href: string;
-  icon?: Icon;
-  iconSrc?: string;
-  featured?: boolean;
-};
+import { content, ICONS } from "./content";
+import type { IconName } from "./content";
 
-const mainLinks: LinkItem[] = [
-  {
-    label: "Belanja Buku di Website",
-    description: "Katalog lengkap dan proses pesanan cepat",
-    href: "https://store.gensaberilmu.com/",
-    icon: ShoppingCart,
-    featured: true,
-  },
-  {
-    label: "Belanja di Gensa Kids",
-    description: "Koleksi buku anak Gensa Berilmu",
-    href: "https://store.gensaberilmu.com/kids",
-    icon: Baby,
-  },
-  {
-    label: "Gabung Channel WhatsApp",
-    description: "Info buku baru, kajian, dan program terbaru",
-    href: "https://whatsapp.com/channel/0029VaSJ3ki7z4kYgFRzuT2N",
-    iconSrc: "/whatsapp-logo.png",
-  },
-  {
-    label: "Daftar Reseller dan Dropship",
-    description: "Mulai bertumbuh bersama Gensa Berilmu",
-    href: "https://desty.page/gensa.berilmu",
-    iconSrc: "/reseller-icon.png",
-  },
-  {
-    label: "Undang Ustadz Edgar Hamas",
-    description: "Informasi agenda dan undangan kajian",
-    href: "https://wa.me/6282258532347",
-    iconSrc: "/google-calendar-icon.png",
-  },
-  {
-    label: "Program Marketing Affiliate",
-    description: "Bagikan manfaat, dapatkan penghasilan",
-    href: "https://bit.ly/ikutmasarinprodukgensadong",
-    iconSrc: "/affiliate-icon.png",
-  },
-  {
-    label: "Chat Admin Gensa Berilmu",
-    description: "Tanya produk dan bantuan pemesanan",
-    href: "https://wa.me/6281384804494",
-    iconSrc: "/whatsapp-logo.png",
-  },
-];
+const { hero, background, quickActions, marketplace, footer } = content;
+const mainLinks = content.links.filter((item) => item.visible);
+const socialLinks = content.social.filter((item) => item.visible);
+const marketplaceLinks = marketplace.items.filter((item) => item.visible);
 
-const marketplaceLinks: {
-  label: string;
-  href: string;
-  icon?: Icon;
-  iconSrc?: string;
-}[] = [
-  {
-    label: "Tokopedia",
-    href: "https://bit.ly/m/TokopediaSeller",
-    iconSrc: "/tokopedia-mascot.png",
-  },
-  {
-    label: "TikTok",
-    href: "https://www.tiktok.com/@gensa.berilmu?_t=8YopMrRuSHZ&_r=1",
-    iconSrc: "/tiktok-logo.png",
-  },
-  {
-    label: "Shopee",
-    href: "https://linktr.ee/gensaberilmu",
-    iconSrc: "/shopee-logo.png",
-  },
-];
+function renderIcon(icon: IconName | undefined, size: number, weight: "regular" | "fill" | "duotone" = "regular") {
+  const Component = icon ? ICONS[icon] : undefined;
+  return Component ? <Component size={size} weight={weight} /> : null;
+}
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -160,35 +83,36 @@ function App() {
 
   const sharePage = async () => {
     const shareData = {
-      title: "Gensa Berilmu",
-      text: "Temukan kanal resmi dan koleksi buku Gensa Berilmu.",
+      title: quickActions.share.title,
+      text: quickActions.share.text,
       url: window.location.href,
     };
 
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        setNotice("Tautan siap dibagikan");
+        setNotice(quickActions.share.toastShared);
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        setNotice("Tautan berhasil disalin");
+        setNotice(quickActions.share.toastCopied);
       }
     } catch (error) {
       if ((error as Error).name !== "AbortError") {
-        setNotice("Bagikan tautan dari menu browser Anda");
+        setNotice(quickActions.share.toastFallback);
       }
     }
   };
 
   const saveContact = () => {
+    const { vcard } = quickActions.saveContact;
     const card = [
       "BEGIN:VCARD",
       "VERSION:3.0",
-      "FN:Gensa Berilmu",
-      "ORG:Penerbit Gensa Berilmu",
-      "TEL;TYPE=WORK,VOICE:+6281384804494",
-      "URL:https://gensaberilmu.com",
-      "X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/gensa.berilmu",
+      `FN:${vcard.name}`,
+      `ORG:${vcard.org}`,
+      `TEL;TYPE=WORK,VOICE:${vcard.phone}`,
+      `URL:${vcard.url}`,
+      `X-SOCIALPROFILE;TYPE=instagram:${vcard.instagram}`,
       "END:VCARD",
     ].join("\n");
     const url = URL.createObjectURL(new Blob([card], { type: "text/vcard" }));
@@ -197,7 +121,7 @@ function App() {
     anchor.download = "gensa-berilmu.vcf";
     anchor.click();
     URL.revokeObjectURL(url);
-    setNotice("Kontak Gensa Berilmu tersimpan");
+    setNotice(quickActions.saveContact.toast);
   };
 
   return (
@@ -211,12 +135,12 @@ function App() {
           muted
           playsInline
           preload="auto"
-          poster="/al-aqsa-poster-v2.jpg"
+          poster={background.poster}
           onCanPlay={() => setVideoState("ready")}
           onError={() => setVideoState("error")}
         >
-          <source src="/al-aqsa-motion-desktop-v2.mp4" type="video/mp4" media="(min-width: 768px)" />
-          <source src="/al-aqsa-motion-v2.mp4" type="video/mp4" />
+          <source src={background.videoDesktop} type="video/mp4" media="(min-width: 768px)" />
+          <source src={background.videoMobile} type="video/mp4" />
         </video>
         <div className="background__fallback" />
         <div className="background__scrim" />
@@ -226,11 +150,11 @@ function App() {
       <main className="profile">
         <header className="profile__header entrance" style={{ "--delay": "40ms" } as React.CSSProperties}>
           <div className="brand-mark">
-            <img src="/logo-gensa.png" alt="Logo Gensa Berilmu" width="74" height="74" />
+            <img src={hero.logo} alt={hero.logoAlt} width="74" height="74" />
           </div>
-          <p className="eyebrow">Official Website Penerbit</p>
-          <h1>Gensa Berilmu</h1>
-          <p className="tagline">Learn History, Repeat Victory!</p>
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h1>{hero.title}</h1>
+          <p className="tagline">{hero.tagline}</p>
         </header>
 
         <section
@@ -240,49 +164,44 @@ function App() {
         >
           <button type="button" onClick={saveContact}>
             <DownloadSimple size={19} weight="bold" />
-            <span>Simpan Kontak</span>
+            <span>{quickActions.saveContact.label}</span>
           </button>
           <button type="button" onClick={sharePage}>
             <ShareNetwork size={19} weight="bold" />
-            <span>Bagikan</span>
+            <span>{quickActions.share.label}</span>
           </button>
         </section>
 
         <nav className="link-list" aria-label="Tautan utama Gensa Berilmu">
-          {mainLinks.map((item, index) => {
-            const ItemIcon = item.icon;
-            return (
-              <a
-                className={`link-card entrance${item.featured ? " link-card--featured" : ""}`}
-                href={item.href}
-                key={item.label}
-                rel="noreferrer"
-                target="_blank"
-                style={{ "--delay": `${160 + index * 60}ms` } as React.CSSProperties}
-              >
-                <span className="link-card__icon">
-                  {item.iconSrc ? (
-                    <img
-                      className="link-card__icon-image"
-                      src={item.iconSrc}
-                      alt=""
-                      width={23}
-                      height={23}
-                    />
-                  ) : (
-                    ItemIcon && (
-                      <ItemIcon size={23} weight={item.featured ? "fill" : "regular"} />
-                    )
-                  )}
-                </span>
-                <span className="link-card__copy">
-                  <strong>{item.label}</strong>
-                  <small>{item.description}</small>
-                </span>
-                <CaretRight className="link-card__arrow" size={20} weight="bold" />
-              </a>
-            );
-          })}
+          {mainLinks.map((item, index) => (
+            <a
+              className={`link-card entrance${item.featured ? " link-card--featured" : ""}`}
+              href={item.href}
+              key={item.id}
+              rel="noreferrer"
+              target="_blank"
+              style={{ "--delay": `${160 + index * 60}ms` } as React.CSSProperties}
+            >
+              <span className="link-card__icon">
+                {item.iconSrc ? (
+                  <img
+                    className="link-card__icon-image"
+                    src={item.iconSrc}
+                    alt=""
+                    width={23}
+                    height={23}
+                  />
+                ) : (
+                  renderIcon(item.icon, 23, item.featured ? "fill" : "regular")
+                )}
+              </span>
+              <span className="link-card__copy">
+                <strong>{item.label}</strong>
+                <small>{item.description}</small>
+              </span>
+              <CaretRight className="link-card__arrow" size={20} weight="bold" />
+            </a>
+          ))}
         </nav>
 
         <section
@@ -290,32 +209,23 @@ function App() {
           aria-label="Media sosial resmi"
           style={{ "--delay": "560ms" } as React.CSSProperties}
         >
-          <a href="https://instagram.com/gensa.berilmu" target="_blank" rel="noreferrer">
-            <img
-              className="social-row__icon-image"
-              src="/instagram-logo.png"
-              alt=""
-              width={23}
-              height={23}
-            />
-            <span>Instagram</span>
-            <ArrowUpRight size={17} weight="bold" />
-          </a>
-          <a
-            href="https://youtube.com/channel/UC8tIGvFz0zClZ588XeJtVGg"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              className="social-row__icon-image"
-              src="/youtube-logo.png"
-              alt=""
-              width={23}
-              height={23}
-            />
-            <span>YouTube</span>
-            <ArrowUpRight size={17} weight="bold" />
-          </a>
+          {socialLinks.map((item) => (
+            <a href={item.href} key={item.id} target="_blank" rel="noreferrer">
+              {item.iconSrc ? (
+                <img
+                  className="social-row__icon-image"
+                  src={item.iconSrc}
+                  alt=""
+                  width={23}
+                  height={23}
+                />
+              ) : (
+                renderIcon(item.icon, 23)
+              )}
+              <span>{item.label}</span>
+              <ArrowUpRight size={17} weight="bold" />
+            </a>
+          ))}
         </section>
 
         <section
@@ -325,36 +235,33 @@ function App() {
         >
           <div className="section-heading">
             <BookOpenText size={22} weight="duotone" />
-            <h2 id="marketplace-heading">Temukan kami di marketplace</h2>
+            <h2 id="marketplace-heading">{marketplace.heading}</h2>
           </div>
           <div className="marketplace__grid">
-            {marketplaceLinks.map((item) => {
-              const ItemIcon = item.icon;
-              return (
-                <a href={item.href} key={item.label} target="_blank" rel="noreferrer">
-                  {item.iconSrc ? (
-                    <img
-                      className="marketplace__icon-image"
-                      src={item.iconSrc}
-                      alt=""
-                      width={25}
-                      height={25}
-                    />
-                  ) : (
-                    ItemIcon && <ItemIcon size={25} weight="duotone" />
-                  )}
-                  <span>{item.label}</span>
-                  <ArrowUpRight size={16} weight="bold" />
-                </a>
-              );
-            })}
+            {marketplaceLinks.map((item) => (
+              <a href={item.href} key={item.id} target="_blank" rel="noreferrer">
+                {item.iconSrc ? (
+                  <img
+                    className="marketplace__icon-image"
+                    src={item.iconSrc}
+                    alt=""
+                    width={25}
+                    height={25}
+                  />
+                ) : (
+                  renderIcon(item.icon, 25, "duotone")
+                )}
+                <span>{item.label}</span>
+                <ArrowUpRight size={16} weight="bold" />
+              </a>
+            ))}
           </div>
         </section>
 
         <footer className="footer entrance" style={{ "--delay": "680ms" } as React.CSSProperties}>
-          <img src="/icon.png" alt="" width="23" height="23" />
-          <p>© 2026 Gensa Berilmu. Semua hak dilindungi.</p>
-          <a href="https://gensaberilmu.com" aria-label="Buka gensaberilmu.com">
+          <img src={footer.icon} alt="" width="23" height="23" />
+          <p>{footer.text}</p>
+          <a href={footer.siteUrl} aria-label={`Buka ${new URL(footer.siteUrl).host}`}>
             <LinkSimple size={18} />
           </a>
         </footer>
