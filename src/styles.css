@@ -530,6 +530,13 @@ h1 {
   animation-delay: var(--delay, 0ms);
 }
 
+/* Editor preview: show edits instantly. Moving a card remounts its DOM node,
+   which would otherwise replay the entrance animation and look delayed. */
+.site-shell[data-preview] .entrance {
+  opacity: 1;
+  animation: none;
+}
+
 @keyframes enter-up {
   from {
     opacity: 0;

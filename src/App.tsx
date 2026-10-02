@@ -1,13 +1,17 @@
 import { ArrowUpRight, CaretRight, Check, DownloadSimple, LinkSimple, ShareNetwork, BookOpenText } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 
-import { content, ICONS } from "./content";
+import { ICONS } from "./content";
 import type { IconName } from "./content";
+import { isPreviewMode, useSiteContent } from "./preview";
 
-const { hero, background, quickActions, marketplace, footer } = content;
-const mainLinks = content.links.filter((item) => item.visible);
-const socialLinks = content.social.filter((item) => item.visible);
-const marketplaceLinks = marketplace.items.filter((item) => item.visible);
+function hostOf(url: string) {
+  try {
+    return new URL(url).host;
+  } catch {
+    return url;
+  }
+}
 
 function renderIcon(icon: IconName | undefined, size: number, weight: "regular" | "fill" | "duotone" = "regular") {
   const Component = icon ? ICONS[icon] : undefined;
@@ -29,6 +33,11 @@ function useReducedMotion() {
 }
 
 function App() {
+  const site = useSiteContent();
+  const { hero, background, quickActions, marketplace, footer } = site;
+  const mainLinks = site.links.filter((item) => item.visible);
+  const socialLinks = site.social.filter((item) => item.visible);
+  const marketplaceLinks = marketplace.items.filter((item) => item.visible);
   const reducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoState, setVideoState] = useState<"loading" | "ready" | "error">(
@@ -125,7 +134,7 @@ function App() {
   };
 
   return (
-    <div className="site-shell" data-video-state={videoState}>
+    <div className="site-shell" data-video-state={videoState} data-preview={isPreviewMode || undefined}>
       <div className="background" aria-hidden="true">
         <video
           ref={videoRef}
@@ -261,7 +270,7 @@ function App() {
         <footer className="footer entrance" style={{ "--delay": "680ms" } as React.CSSProperties}>
           <img src={footer.icon} alt="" width="23" height="23" />
           <p>{footer.text}</p>
-          <a href={footer.siteUrl} aria-label={`Buka ${new URL(footer.siteUrl).host}`}>
+          <a href={footer.siteUrl} aria-label={`Buka ${hostOf(footer.siteUrl)}`}>
             <LinkSimple size={18} />
           </a>
         </footer>
