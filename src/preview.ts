@@ -12,6 +12,7 @@ import type { SiteContent } from "./content";
  */
 const ALLOWED_ORIGINS = new Set([
   "https://store.gensaberilmu.com",
+  "https://gensaberilmu.xyz", // staging admin
   "http://localhost:3000",
 ]);
 
