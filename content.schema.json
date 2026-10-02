@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gensa Berilmu landing content",
+  "description": "Kontrak untuk src/content.json. Dipakai editor Landing Page di admin sebelum commit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hero", "background", "quickActions", "links", "social", "marketplace", "footer"],
+  "$defs": {
+    "url": { "type": "string", "pattern": "^(https?://|/)", "maxLength": 2048 },
+    "icon": { "enum": ["ShoppingCart", "Baby", "Broadcast", "BookOpenText", "Check", "LinkSimple", "ShareNetwork"] },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "href", "visible"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 140 },
+        "href": { "$ref": "#/$defs/url" },
+        "icon": { "$ref": "#/$defs/icon" },
+        "iconSrc": { "type": "string", "pattern": "^/", "maxLength": 256 },
+        "featured": { "type": "boolean" },
+        "visible": { "type": "boolean" }
+      }
+    }
+  },
+  "properties": {
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logo", "logoAlt", "eyebrow", "title", "tagline"],
+      "properties": {
+        "logo": { "type": "string", "pattern": "^/" },
+        "logoAlt": { "type": "string", "maxLength": 120 },
+        "eyebrow": { "type": "string", "maxLength": 80 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tagline": { "type": "string", "maxLength": 140 }
+      }
+    },
+    "background": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["poster", "videoDesktop", "videoMobile"],
+      "properties": {
+        "poster": { "type": "string", "pattern": "^/" },
+        "videoDesktop": { "type": "string", "pattern": "^/" },
+        "videoMobile": { "type": "string", "pattern": "^/" }
+      }
+    },
+    "quickActions": { "type": "object" },
+    "links": { "type": "array", "maxItems": 20, "items": { "$ref": "#/$defs/link" } },
+    "social": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/link" } },
+    "marketplace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["heading", "items"],
+      "properties": {
+        "heading": { "type": "string", "maxLength": 120 },
+        "items": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/link" } }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "siteUrl", "icon"],
+      "properties": {
+        "text": { "type": "string", "maxLength": 200 },
+        "siteUrl": { "$ref": "#/$defs/url" },
+        "icon": { "type": "string", "pattern": "^/" }
+      }
+    }
+  }
+}
