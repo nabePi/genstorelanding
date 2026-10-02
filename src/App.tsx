@@ -7,7 +7,7 @@ import { useSiteContent } from "./preview";
 
 function hostOf(url: string) {
   try {
-    return new URL(url, window.location.href).host;
+    return new URL(url).host;
   } catch {
     return url;
   }
