@@ -51,6 +51,14 @@
       "visible": true
     },
     {
+      "id": "item-11f7a833",
+      "label": "Gensa Stories - Artikel GRATIS!",
+      "description": "Kisah, sejarah, dan fun fact!",
+      "href": "https://store.gensaberilmu.com/blog",
+      "icon": "BookOpenText",
+      "visible": true
+    },
+    {
       "id": "channel-wa",
       "label": "Gabung Channel WhatsApp",
       "description": "Info buku baru, kajian, dan program terbaru",
