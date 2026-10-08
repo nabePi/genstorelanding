@@ -80,7 +80,7 @@
       "description": "Bagikan manfaat, dapatkan penghasilan",
       "href": "https://bit.ly/ikutmasarinprodukgensadong",
       "iconSrc": "/affiliate-icon.png",
-      "visible": true
+      "visible": false
     },
     {
       "id": "chat-admin",
