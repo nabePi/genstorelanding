@@ -34,12 +34,20 @@
   },
   "links": [
     {
+      "id": "item-a2f5dba0",
+      "label": "PRE-ORDER 25 MUSLIM VICTORIES",
+      "description": "Spesial Bertanda Tangan!",
+      "href": "https://gensaberilmu.com/l/25-muslim-victories",
+      "icon": "BookOpenText",
+      "featured": true,
+      "visible": true
+    },
+    {
       "id": "belanja-web",
       "label": "Belanja Buku di Website",
       "description": "Katalog lengkap dan proses pesanan cepat",
       "href": "https://store.gensaberilmu.com/",
       "icon": "ShoppingCart",
-      "featured": true,
       "visible": true
     },
     {
